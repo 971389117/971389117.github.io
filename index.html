@@ -319,6 +319,29 @@ echo &quot;$2&quot;
 <blockquote>
 <p>$# 可以获得参数个数</p>
 </blockquote>
+<p><a href="http://www.runoob.com/linux/linux-shell-passing-arguments.html" target="_blank" rel="noopener">传参参考</a></p>
+<h3 id="添加到环境变量"><a href="#添加到环境变量" class="headerlink" title="添加到环境变量"></a>添加到环境变量</h3><p><code>export PATH=$PATH:path/to/append</code> </p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>定义<br>array_name=(value0 value1 value2 value3)<br>使用<br>${数组名[下标]}<br>valuen=${array_name[n]}<br>valuen=${array_name[n]}</p>
+<h3 id="输入-输出重定向"><a href="#输入-输出重定向" class="headerlink" title="输入/输出重定向"></a>输入/输出重定向</h3><p>echo ‘输出重定向’ &gt; a.txt<br>echo ‘输出追加重定向’ &gt;&gt; a.txt<br><a href="http://www.runoob.com/linux/linux-shell-io-redirections.html" target="_blank" rel="noopener">参考</a></p>
+<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><h4 id="if"><a href="#if" class="headerlink" title="if"></a>if</h4><p>if 方括号中【num2*2-num1+20-20】计算结果为100，结果输出两个数相等<br>在方括号中，可以进行算术运算</p>
+<pre><code>num1=100
+num2=100
+
+if test $num1 -eq $[num2*2-num1+20-20]
+then 
+    echo &apos;两个数相等&apos;
+else
+    echo &apos;两个数不相等&apos;
+fi
+</code></pre><p>更多用法查看文档</p>
+<p>for 循环<br><a href="http://www.runoob.com/linux/linux-shell-process-control.html" target="_blank" rel="noopener">http://www.runoob.com/linux/linux-shell-process-control.html</a></p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p><a href="http://www.runoob.com/linux/linux-shell-func.html" target="_blank" rel="noopener">http://www.runoob.com/linux/linux-shell-func.html</a></p>
+<h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><p>递归的更改文件属组：<code>chgrp [-R] 属组名 文件名</code><br>更改文件属主，以及属组<br><code>chown [-R] 属主名 文件名</code><br><code>chown [-R] 属主名:属组名 文件名</code></p>
+<p>更改文件属性<br>数字法：<br>r = 4  w = 2  x = 1<br>7 可读可写可执行<br>6 可读可写<br>5 可读可执行<br>4 可读<br>3 可写可执行<br>2 可写<br>1 可执行<br>0 不可读不可写不可执行</p>
+<p><code>chmod [-R] 777 文件或目录</code></p>
+<p>字母法：<br>u = user  g = group  o = other  a = all</p>
+<p>直接赋值：<code>chmod u=rwx,g=rx,o=r 文件名</code><br>增量赋值: <code>chmod u+x 文件名</code><br>拿掉所有人可执行权限: <code>chmod a-x 文件名</code></p>
+<p>本篇参考资料：<br><a href="https://explainshell.com/explain?cmd=ls+-lrt" target="_blank" rel="noopener">命令行释义:explainshell.com</a><br><a href="https://explainshell.com/explain?cmd=ls+-lrt" target="_blank" rel="noopener">常见使用方法：太长不要读</a><br><a href="https://xiedaimala.com/tasks/24e32d28-9aeb-4010-a643-d97904e8101d" target="_blank" rel="noopener">写代码啦：命令行基础</a><br><a href="http://www.runoob.com/linux/linux-shell.html" target="_blank" rel="noopener">菜鸟教程：shell</a></p>
 
           
         
