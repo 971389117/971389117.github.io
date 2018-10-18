@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="这是一篇基础的学习笔记，内容为自己掌握内容，未掌握内容用时查阅文档即可。 基础篇如何使用这些命令ls 列出命令列表cat 查看文本文件mv 移动或重命名touch 创建文件tar 压缩解压缩cd 移动目录type 可以看到寻找过程which 可以看到寻找结果  Too Long; Don’t Read    tldr ls|cat|mv|touch">
+<meta name="description" content="这是一篇基础的学习笔记，内容为自己掌握内容，未掌握内容用时查阅文档即可。 基础篇如何使用这些命令ls 列出命令列表cat 查看文本文件mv 移动或重命名touch 创建文件tar 压缩解压缩cd 移动目录type 可以看到寻找过程which 可以看到寻找结果  Too Long; Don’t Read    tldr ls|cat|mv|touch  升级篇变量 与 传递参数一 变量定义 abcd">
 <meta property="og:type" content="article">
 <meta property="og:title" content="bash简单笔记">
 <meta property="og:url" content="http://yoursite.com/2018/10/18/bash简单笔记/index.html">
 <meta property="og:site_name" content="猥琐发育，别浪">
-<meta property="og:description" content="这是一篇基础的学习笔记，内容为自己掌握内容，未掌握内容用时查阅文档即可。 基础篇如何使用这些命令ls 列出命令列表cat 查看文本文件mv 移动或重命名touch 创建文件tar 压缩解压缩cd 移动目录type 可以看到寻找过程which 可以看到寻找结果  Too Long; Don’t Read    tldr ls|cat|mv|touch">
+<meta property="og:description" content="这是一篇基础的学习笔记，内容为自己掌握内容，未掌握内容用时查阅文档即可。 基础篇如何使用这些命令ls 列出命令列表cat 查看文本文件mv 移动或重命名touch 创建文件tar 压缩解压缩cd 移动目录type 可以看到寻找过程which 可以看到寻找结果  Too Long; Don’t Read    tldr ls|cat|mv|touch  升级篇变量 与 传递参数一 变量定义 abcd">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-18T02:30:29.000Z">
+<meta property="og:updated_time" content="2018-10-18T02:30:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bash简单笔记">
-<meta name="twitter:description" content="这是一篇基础的学习笔记，内容为自己掌握内容，未掌握内容用时查阅文档即可。 基础篇如何使用这些命令ls 列出命令列表cat 查看文本文件mv 移动或重命名touch 创建文件tar 压缩解压缩cd 移动目录type 可以看到寻找过程which 可以看到寻找结果  Too Long; Don’t Read    tldr ls|cat|mv|touch">
+<meta name="twitter:description" content="这是一篇基础的学习笔记，内容为自己掌握内容，未掌握内容用时查阅文档即可。 基础篇如何使用这些命令ls 列出命令列表cat 查看文本文件mv 移动或重命名touch 创建文件tar 压缩解压缩cd 移动目录type 可以看到寻找过程which 可以看到寻找结果  Too Long; Don’t Read    tldr ls|cat|mv|touch  升级篇变量 与 传递参数一 变量定义 abcd">
 
 
 
@@ -304,6 +304,17 @@
 <blockquote>
 <p><strong>Too Long; Don’t Read</strong><br>    tldr ls|cat|mv|touch</p>
 </blockquote>
+<h2 id="升级篇"><a href="#升级篇" class="headerlink" title="升级篇"></a>升级篇</h2><h3 id="变量-与-传递参数"><a href="#变量-与-传递参数" class="headerlink" title="变量 与 传递参数"></a>变量 与 传递参数</h3><p>一 变量<br>定义 abcd=abcd<br>使用 $abcd</p>
+<p>只读变量 <code>readonly myUrl</code><br>删除变量 <code>unset variable_name</code></p>
+<p>二 传参</p>
+<p>test.sh</p>
+<pre><code>#!/bin/bash
+echo &quot;$1&quot;
+echo &quot;$2&quot;
+</code></pre><p>执行脚本：chmod +x test.sh<br>./test.sh 1 2<br>1<br>2</p>
+<blockquote>
+<p>$# 可以获得参数个数</p>
+</blockquote>
 
       
     </div>
@@ -450,7 +461,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础篇"><span class="nav-number">1.</span> <span class="nav-text">基础篇</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础篇"><span class="nav-number">1.</span> <span class="nav-text">基础篇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#升级篇"><span class="nav-number">2.</span> <span class="nav-text">升级篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量-与-传递参数"><span class="nav-number">2.1.</span> <span class="nav-text">变量 与 传递参数</span></a></li></ol></li></ol></div>
             
 
           </div>

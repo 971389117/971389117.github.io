@@ -308,6 +308,17 @@
 <blockquote>
 <p><strong>Too Long; Don’t Read</strong><br>    tldr ls|cat|mv|touch</p>
 </blockquote>
+<h2 id="升级篇"><a href="#升级篇" class="headerlink" title="升级篇"></a>升级篇</h2><h3 id="变量-与-传递参数"><a href="#变量-与-传递参数" class="headerlink" title="变量 与 传递参数"></a>变量 与 传递参数</h3><p>一 变量<br>定义 abcd=abcd<br>使用 $abcd</p>
+<p>只读变量 <code>readonly myUrl</code><br>删除变量 <code>unset variable_name</code></p>
+<p>二 传参</p>
+<p>test.sh</p>
+<pre><code>#!/bin/bash
+echo &quot;$1&quot;
+echo &quot;$2&quot;
+</code></pre><p>执行脚本：chmod +x test.sh<br>./test.sh 1 2<br>1<br>2</p>
+<blockquote>
+<p>$# 可以获得参数个数</p>
+</blockquote>
 
           
         
