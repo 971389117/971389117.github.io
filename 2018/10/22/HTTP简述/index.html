@@ -79,22 +79,17 @@
 
 
 
-<meta name="description" content="前情提要篇万物第一件事是安装与更新，但是网络教程繁多，本文目的为自己知识整理掌握，不一一详述。 问：如何设置 SSH_KEY?答：官网解答：设置ssh key 自己解答：  在本机生成 sshkey  运行 ssh-keygen -t rsa -b 4096 -C &amp;quot;邮箱&amp;quot;运行 cat ~/.ssh/id_rsa.pub 复制显示的 sshkey  在 GitHub 上设置 s">
+<meta name="description" content="DNS(Domain Name System) 输入域名，输出 IP 将域名和 IP 地址相互映射的一个分布式数据库  nslookup baidu.comping baidu.com curl 命令查看参数意思 -d –data   -s –silent  -v –verbose  -H –header curl -X POST -d &amp;quot;1234567890&amp;quot; -s -v -">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git命令简记">
-<meta property="og:url" content="http://yoursite.com/2018/10/17/git命令简记/index.html">
+<meta property="og:title" content="HTTP简述">
+<meta property="og:url" content="http://yoursite.com/2018/10/22/HTTP简述/index.html">
 <meta property="og:site_name" content="猥琐发育，别浪">
-<meta property="og:description" content="前情提要篇万物第一件事是安装与更新，但是网络教程繁多，本文目的为自己知识整理掌握，不一一详述。 问：如何设置 SSH_KEY?答：官网解答：设置ssh key 自己解答：  在本机生成 sshkey  运行 ssh-keygen -t rsa -b 4096 -C &amp;quot;邮箱&amp;quot;运行 cat ~/.ssh/id_rsa.pub 复制显示的 sshkey  在 GitHub 上设置 s">
+<meta property="og:description" content="DNS(Domain Name System) 输入域名，输出 IP 将域名和 IP 地址相互映射的一个分布式数据库  nslookup baidu.comping baidu.com curl 命令查看参数意思 -d –data   -s –silent  -v –verbose  -H –header curl -X POST -d &amp;quot;1234567890&amp;quot; -s -v -">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="evernotecid://CA06FE42-1B76-4E3C-88D7-061DA0323D14/wwwevernotecom/188479944/ENResource/p47">
-<meta property="og:image" content="evernotecid://CA06FE42-1B76-4E3C-88D7-061DA0323D14/wwwevernotecom/188479944/ENResource/p48">
-<meta property="og:image" content="evernotecid://CA06FE42-1B76-4E3C-88D7-061DA0323D14/wwwevernotecom/188479944/ENResource/p49">
-<meta property="og:image" content="evernotecid://CA06FE42-1B76-4E3C-88D7-061DA0323D14/wwwevernotecom/188479944/ENResource/p51">
-<meta property="og:updated_time" content="2018-10-17T08:51:49.000Z">
+<meta property="og:updated_time" content="2018-10-22T05:50:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git命令简记">
-<meta name="twitter:description" content="前情提要篇万物第一件事是安装与更新，但是网络教程繁多，本文目的为自己知识整理掌握，不一一详述。 问：如何设置 SSH_KEY?答：官网解答：设置ssh key 自己解答：  在本机生成 sshkey  运行 ssh-keygen -t rsa -b 4096 -C &amp;quot;邮箱&amp;quot;运行 cat ~/.ssh/id_rsa.pub 复制显示的 sshkey  在 GitHub 上设置 s">
-<meta name="twitter:image" content="evernotecid://CA06FE42-1B76-4E3C-88D7-061DA0323D14/wwwevernotecom/188479944/ENResource/p47">
+<meta name="twitter:title" content="HTTP简述">
+<meta name="twitter:description" content="DNS(Domain Name System) 输入域名，输出 IP 将域名和 IP 地址相互映射的一个分布式数据库  nslookup baidu.comping baidu.com curl 命令查看参数意思 -d –data   -s –silent  -v –verbose  -H –header curl -X POST -d &amp;quot;1234567890&amp;quot; -s -v -">
 
 
 
@@ -124,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/17/git命令简记/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/22/HTTP简述/"/>
 
 
 
 
 
-  <title>git命令简记 | 猥琐发育，别浪</title>
+  <title>HTTP简述 | 猥琐发育，别浪</title>
   
 
 
@@ -237,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/17/git命令简记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/22/HTTP简述/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zxx">
@@ -254,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">git命令简记</h1>
+          <h1 class="post-title" itemprop="name headline">HTTP简述</h1>
         
 
         <div class="post-meta">
@@ -266,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-17T16:49:10+08:00">
-                2018-10-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-22T13:49:39+08:00">
+                2018-10-22
               </time>
             
 
@@ -304,37 +299,21 @@
       
 
       
-        <h2 id="前情提要篇"><a href="#前情提要篇" class="headerlink" title="前情提要篇"></a>前情提要篇</h2><p>万物第一件事是安装与更新，但是网络教程繁多，本文目的为自己知识整理掌握，不一一详述。</p>
-<p>问：如何设置 SSH_KEY?<br>答：<br>官网解答：<a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/" target="_blank" rel="noopener">设置ssh key</a></p>
-<p>自己解答：</p>
-<ol>
-<li><strong>在本机生成 sshkey</strong></li>
-</ol>
-<p>运行 <code>ssh-keygen -t rsa -b 4096 -C &quot;邮箱&quot;</code><br>运行 <code>cat ~/.ssh/id_rsa.pub</code> 复制显示的 sshkey</p>
-<ol start="2">
-<li><strong>在 GitHub 上设置 sshkey</strong></li>
-</ol>
-<p>注册账户,右上角选择 settings, 选择 SSH and GPG keys<br><img src="evernotecid://CA06FE42-1B76-4E3C-88D7-061DA0323D14/wwwevernotecom/188479944/ENResource/p47" alt="ce4a0b4751df25b4ffcb8ce2fd3b579e.jpeg"></p>
-<ol start="3">
-<li>回到命令行<br>运行 <code>ssh -T git@github.com</code><br>如果告诉你”Hi 971389117! You’ve successfully authenticated, but GitHub does not provide shell access.”,就成功了,否则重新来过.</li>
-</ol>
-<p>问：如何配置本地 GitHub 账户信息？<br>git config –global user.name 你的英文名<br>git config –global user.email 你的邮箱<br>git config –global push.default matching<br>git config –global core.quotepath false<br>git config –global core.editor “vim”<br>五句话，依次运行。不执行的话，电脑可能会爆炸你信不信。</p>
-<p>查看当前生效配置 <code>git config -l</code><br>其它可以参考 <code>tldr git config</code></p>
-<h2 id="正式入门篇"><a href="#正式入门篇" class="headerlink" title="正式入门篇"></a>正式入门篇</h2><h3 id="基础入门"><a href="#基础入门" class="headerlink" title="基础入门"></a>基础入门</h3><p>应用题:(一)在桌面生成一个文件夹,进入里面,初始化 git 仓库,生成两个任意文件,添加到暂存区,最后提交修改.每个步骤都要查看状态.</p>
-<p>解答:</p>
-<p>初始化仓库 <code>git init</code><br>添加到暂存 <code>git add *</code><br>提交 <code>git commit -m &quot;评论&quot;</code><br>查看状态 <code>git status -sb</code> s 不是summary 摘要,总结,而是 short; b是 branch 分支<br>查看日志 <code>git log</code></p>
-<p>(二)在GitHub 上新建一个仓库,名称随意,将本地项目与远端项目链接起来.<br>git remote add origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:<strong>971389117/git-demo-1.git</strong></p>
-<p>(三)将本地仓库推送到远程仓库<br>答:1.git add *</p>
-<pre><code>2. git commit -m &quot;&quot;
-3. git pull 将远程拉下来（更新本地仓库）
-4. git push 或者 git push -u origin master
-</code></pre><p> 简答题:请说出如何克隆一个远程仓库到本地<br> 1️⃣获得远程仓库的 HTTPS 或者 SSH 地址<br> 2️⃣git clone SSH地址或 HTTPS 地址</p>
-<p> 请简述【git ignore】的作用.<br> 答: 【gitignore】是 git 项目根目录下的一个文本文件，可以忽略以及避免不必要的文件内容上传到远程仓库。<br><img src="evernotecid://CA06FE42-1B76-4E3C-88D7-061DA0323D14/wwwevernotecom/188479944/ENResource/p48" alt="e7267c551292b66d863dc59f3eef532e.png"><br><img src="evernotecid://CA06FE42-1B76-4E3C-88D7-061DA0323D14/wwwevernotecom/188479944/ENResource/p49" alt="7c481d1e0e7b6639e36b95b44f22252e.png"><br>例如以上设置，就可以避免【.gitignore】【node_modules】以及【.vscode】上传到远程仓库</p>
-<p>简答题：.gitignore 怎么查询有几种书写方式？最常见的书写方式有哪些？</p>
-<h2 id="GitHub-奇技淫巧"><a href="#GitHub-奇技淫巧" class="headerlink" title="GitHub 奇技淫巧"></a>GitHub 奇技淫巧</h2><h3 id="使用-GitHub-Pages-预览-HTML"><a href="#使用-GitHub-Pages-预览-HTML" class="headerlink" title="使用 GitHub Pages 预览 HTML"></a>使用 GitHub Pages 预览 HTML</h3><ol>
-<li>Settings <img src="evernotecid://CA06FE42-1B76-4E3C-88D7-061DA0323D14/wwwevernotecom/188479944/ENResource/p51" alt="0fa887d8c172f7b82c761d96e85cbb8e.png"></li>
-</ol>
-<p><a href="https://xiedaimala.com/tasks/24e32d28-9aeb-4010-a643-d97904e8101d/text_tutorials/317c56bc-d774-415c-9594-4b11e67a3f5d" target="_blank" rel="noopener">参考链接</a></p>
+        <h2 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h2><ul>
+<li>输入域名，输出 IP</li>
+<li>将域名和 IP 地址相互映射的一个分布式数据库</li>
+</ul>
+<p>nslookup baidu.com<br>ping baidu.com</p>
+<h2 id="curl-命令"><a href="#curl-命令" class="headerlink" title="curl 命令"></a>curl 命令</h2><p><a href="https://explainshell.com/explain?cmd=echo#" target="_blank" rel="noopener">查看参数意思</a><br> -d –data   -s –silent  -v –verbose  -H –header</p>
+<p><code>curl -X POST -d &quot;1234567890&quot; -s -v -H &quot;Frank: xxx&quot; -- &quot;https://www.baidu.com&quot;</code></p>
+<p>curl 和 wget 的区别</p>
+<blockquote>
+<p>wget是个专职的下载利器，简单，专一，极致；而curl可以下载，但是长项不在于下载，而在于模拟提交web数据，POST/GET请求，调试网页，等等。<br>在下载上，也各有所长，wget可以递归，支持断点；而curl支持URL中加入变量，因此可以批量下载。<br>个人用途上，我经常用wget来下载文件，加 -c选项不怕断网；使用curl 来跟网站的API 交互，简便清晰。</p>
+</blockquote>
+<h2 id="HTTP-请求包括哪些部分"><a href="#HTTP-请求包括哪些部分" class="headerlink" title="HTTP 请求包括哪些部分"></a>HTTP 请求包括哪些部分</h2><p>请求包含三或四个部分：<br>动词 路径 协议/版本<br>2 Key1: value1<br>2 Key2: value2<br>2 Key3: value3<br>2 Content-Type: application/x-www-form-urlencoded<br>2 Host: <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a><br>2 User-Agent: curl/7.54.0<br>3<br>4 要上传的数据</p>
+<p>请求最多包含四部分，最少包含三部分。（也就是说第四部分可以为空）<br>第三部分永远都是一个回车（\n）<br>动词有 GET POST PUT PATCH DELETE HEAD OPTIONS 等<br>这里的路径包括「查询参数」，但不包括「锚点」<br>如果你没有写路径，那么路径默认为 /<br>第 2 部分中的 Content-Type 标注了第 4 部分的格式</p>
+<h2 id="HTTP-响应包括哪些部分"><a href="#HTTP-响应包括哪些部分" class="headerlink" title="HTTP 响应包括哪些部分"></a>HTTP 响应包括哪些部分</h2><p>响应的格式<br>1 协议/版本号 状态码 状态解释<br>2 Key1: value1<br>2 Key2: value2<br>2 Content-Length: 17931<br>2 Content-Type: text/html<br>3<br>4 要下载的内容<br>状态码要背，是服务器对浏览器说的话<br>1xx 不常用<br>2xx 表示成功<br>3xx 表示滚吧<br>4xx 表示你丫错了<br>5xx 表示好吧，我错了<br>状态解释没什么用<br>第 2 部分中的 Content-Type 标注了第 4 部分的格式<br>第 2 部分中的 Content-Type 遵循 MIME 规范    </p>
+<h3 id="如何用Chrome开发者工具查看-HTTP-响应内容"><a href="#如何用Chrome开发者工具查看-HTTP-响应内容" class="headerlink" title="如何用Chrome开发者工具查看 HTTP 响应内容"></a>如何用Chrome开发者工具查看 HTTP 响应内容</h3><p>用 Chrome 发请求<br>打开 Network<br>地址栏输入网址<br>在 Network 点击，查看 request或 response，点击「view source」</p>
 
       
     </div>
@@ -359,8 +338,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/17/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/10/22/HTTP简单初步/" rel="next" title="HTTP简单初步">
+                <i class="fa fa-chevron-left"></i> HTTP简单初步
               </a>
             
           </div>
@@ -368,10 +347,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/18/bash简单笔记/" rel="prev" title="bash简单笔记">
-                bash简单笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -485,7 +460,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前情提要篇"><span class="nav-number">1.</span> <span class="nav-text">前情提要篇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正式入门篇"><span class="nav-number">2.</span> <span class="nav-text">正式入门篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础入门"><span class="nav-number">2.1.</span> <span class="nav-text">基础入门</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub-奇技淫巧"><span class="nav-number">3.</span> <span class="nav-text">GitHub 奇技淫巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-GitHub-Pages-预览-HTML"><span class="nav-number">3.1.</span> <span class="nav-text">使用 GitHub Pages 预览 HTML</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS-Domain-Name-System"><span class="nav-number">1.</span> <span class="nav-text">DNS(Domain Name System)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#curl-命令"><span class="nav-number">2.</span> <span class="nav-text">curl 命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-请求包括哪些部分"><span class="nav-number">3.</span> <span class="nav-text">HTTP 请求包括哪些部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-响应包括哪些部分"><span class="nav-number">4.</span> <span class="nav-text">HTTP 响应包括哪些部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何用Chrome开发者工具查看-HTTP-响应内容"><span class="nav-number">4.1.</span> <span class="nav-text">如何用Chrome开发者工具查看 HTTP 响应内容</span></a></li></ol></li></ol></div>
             
 
           </div>
