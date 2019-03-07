@@ -70,6 +70,125 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Symbol" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/05/Symbol/" class="article-date">
+  <time datetime="2019-03-05T06:05:54.000Z" itemprop="datePublished">2019-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/05/Symbol/">Symbol</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>原因：ES5 的对象属性名都是字符串，这容易造成属性名的冲突。比如，你使用了一个他人提供的对象，但又想为这个对象添加新的方法（mixin 模式），新方法的名字就有可能与现有方法产生冲突。如果有一种机制，保证每个属性的名字都是独一无二的就好了，这样就从根本上防止属性名的冲突。这就是 ES6 引入Symbol的原因。<br><img src="evernotecid://D8BFE205-F786-4362-B321-62BDA0F184F5/appyinxiangcom/21673654/ENResource/p308" alt="d3d6cfe086e90f756721d5bde2c05fcf.png"></p>
+<p>特性：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明一个 Symbol</span></span><br><span class="line"><span class="keyword">let</span> s=<span class="built_in">Symbol</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">//Symbol 是原始类型</span></span><br><span class="line"><span class="keyword">typeof</span> s  <span class="comment">// symbol</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Symbol 可以有一个描述参数</span></span><br><span class="line"><span class="keyword">let</span> os=<span class="built_in">Symbol</span>(&#123;&#125;)</span><br><span class="line"><span class="keyword">let</span> ns=<span class="built_in">Symbol</span>(<span class="number">123</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//Symbol 是独一无二的，参数仅仅起到描述的作用</span></span><br><span class="line"><span class="built_in">Symbol</span>(<span class="string">'a'</span>) === <span class="built_in">Symbol</span>(<span class="string">'a'</span>) <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果描述参数是对象，会先调用toString方法，将其转换为字符串再生成一个 Symbol 值</span></span><br><span class="line"><span class="keyword">let</span> obj=&#123;</span><br><span class="line">    toString()&#123;<span class="keyword">return</span> <span class="string">'abc'</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Symbol</span>(obj) <span class="comment">//Symbol(abc)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Symbol可以转换为字符串</span></span><br><span class="line"><span class="built_in">String</span>(ns) <span class="comment">// symbol(123)</span></span><br><span class="line"><span class="built_in">String</span>(ns) === s.toString(ns) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//转换为布尔</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="built_in">Symbol</span>()) <span class="comment">//true</span></span><br><span class="line">!<span class="built_in">Symbol</span>() <span class="comment">//false</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>用作常量</strong><br>    定义一组常量，保证这组常量的值都不相等</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> log = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">log.levels = &#123;</span><br><span class="line">  DEBUG: <span class="built_in">Symbol</span>(<span class="string">'debug'</span>),</span><br><span class="line">  INFO: <span class="built_in">Symbol</span>(<span class="string">'info'</span>),</span><br><span class="line">  WARN: <span class="built_in">Symbol</span>(<span class="string">'warn'</span>)</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(log.levels.DEBUG, <span class="string">'debug message'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(log.levels.INFO, <span class="string">'info message'</span>);</span><br><span class="line">下面是另外一个例子。</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> COLOR_RED    = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">const</span> COLOR_GREEN  = <span class="built_in">Symbol</span>();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getComplement</span>(<span class="params">color</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (color) &#123;</span><br><span class="line">    <span class="keyword">case</span> COLOR_RED:</span><br><span class="line">      <span class="keyword">return</span> COLOR_GREEN;</span><br><span class="line">    <span class="keyword">case</span> COLOR_GREEN:</span><br><span class="line">      <span class="keyword">return</span> COLOR_RED;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Undefined color'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>用作属性</strong><br>    不能使用.属性,使用方括号（读写都是）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="built_in">Symbol</span>(<span class="string">'s'</span>)</span><br><span class="line"><span class="keyword">let</span> o = &#123;&#125;</span><br><span class="line">o.s=<span class="string">'123'</span></span><br><span class="line">a[s] = <span class="string">'Hello'</span></span><br><span class="line"><span class="comment">//&#123;s: "123", Symbol(s): "Hello"&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(o,s,&#123;<span class="attr">value</span>:<span class="string">"hello"</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://971389117.github.io/2019/03/05/Symbol/" data-id="cjsyaii6j0000i0s6u5dgfd7o" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="js-里的数据类型" class="article article-type-js" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/05/里的数据类型/" class="article-date">
+  <time datetime="2019-03-05T05:05:23.000Z" itemprop="datePublished">2019-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/05/里的数据类型/">里的数据类型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://971389117.github.io/2019/03/05/里的数据类型/" data-id="cjsyaii73000ai0s68bv2q8ao" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据类型转换" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/05/数据类型转换/" class="article-date">
+  <time datetime="2019-03-05T04:44:05.000Z" itemprop="datePublished">2019-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/05/数据类型转换/">数据类型转换</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>#任意转数字<br>语法：Number(任意):number</p>
+<p>#任意转字符串</p>
+<p>#任意转布尔<br>Number(123) // 123</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://971389117.github.io/2019/03/05/数据类型转换/" data-id="cjsyaii6x0007i0s6kes4pv2a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript-数据类型转换/">JavaScript 数据类型转换</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-CSS布局(未完成)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/11/11/CSS布局(未完成)/" class="article-date">
@@ -112,7 +231,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/11/11/CSS布局(未完成)/" data-id="cjocifmy50000lqhfbz14bkf7" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/11/11/CSS布局(未完成)/" data-id="cjsyaii6p0002i0s6hq2wwipj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -502,7 +621,7 @@ styles]
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/11/10/css速查手册/" data-id="cjob0k9t60005hahfwmqq0a80" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/11/10/css速查手册/" data-id="cjsyaii6y0008i0s6ugiduwtc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -787,7 +906,7 @@ multiline title&quot;&gt;example&lt;/abbr&gt;</code><br><code>data-*</code> 全�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/10/24/html速查手册/" data-id="cjob0k9tp0006hahfc8ifgomp" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/10/24/html速查手册/" data-id="cjsyaii74000bi0s6xfz0iwat" class="article-share-link">Share</a>
       
       
     </footer>
@@ -838,7 +957,7 @@ multiline title&quot;&gt;example&lt;/abbr&gt;</code><br><code>data-*</code> 全�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/10/22/HTTP简述/" data-id="cjob0k9sz0001hahf7161o06j" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/10/22/HTTP简述/" data-id="cjsyaii6t0003i0s6v82i7yw1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -889,7 +1008,7 @@ multiline title&quot;&gt;example&lt;/abbr&gt;</code><br><code>data-*</code> 全�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/10/22/HTTP简单初步/" data-id="cjob0k9su0000hahfc44bgpso" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/10/22/HTTP简单初步/" data-id="cjsyaii6m0001i0s6rw65ryum" class="article-share-link">Share</a>
       
       
     </footer>
@@ -964,7 +1083,7 @@ fi
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/10/18/bash简单笔记/" data-id="cjob0k9t50004hahf1ym6qth1" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/10/18/bash简单笔记/" data-id="cjsyaii6u0004i0s6isemnikg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1031,52 +1150,7 @@ fi
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/10/17/git命令简记/" data-id="cjob0k9t10002hahfh2fjrqk3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/17/hello-world/" class="article-date">
-  <time datetime="2018-10-17T08:36:19.000Z" itemprop="datePublished">2018-10-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/17/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/10/17/hello-world/" data-id="cjob0k9t30003hahfm39rwjn5" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/10/17/git命令简记/" data-id="cjsyaii6w0006i0s6osiwvnwc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1087,6 +1161,11 @@ fi
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -1096,15 +1175,29 @@ fi
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-数据类型转换/">JavaScript 数据类型转换</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JavaScript-数据类型转换/" style="font-size: 10px;">JavaScript 数据类型转换</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li></ul>
     </div>
   </div>
 
@@ -1117,23 +1210,23 @@ fi
       <ul>
         
           <li>
+            <a href="/2019/03/05/Symbol/">Symbol</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/05/里的数据类型/">里的数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/05/数据类型转换/">数据类型转换</a>
+          </li>
+        
+          <li>
             <a href="/2018/11/11/CSS布局(未完成)/">(no title)</a>
           </li>
         
           <li>
             <a href="/2018/11/10/css速查手册/">css速查手册</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/24/html速查手册/">html速查手册</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/22/HTTP简述/">HTTP简述</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/22/HTTP简单初步/">HTTP简单初步</a>
           </li>
         
       </ul>
@@ -1148,7 +1241,7 @@ fi
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2018 zxx<br>
+      &copy; 2019 zxx<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

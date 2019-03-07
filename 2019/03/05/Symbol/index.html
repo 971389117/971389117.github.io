@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Symbol | 猥琐发育，别浪</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="概述原因：ES5 的对象属性名都是字符串，这容易造成属性名的冲突。比如，你使用了一个他人提供的对象，但又想为这个对象添加新的方法（mixin 模式），新方法的名字就有可能与现有方法产生冲突。如果有一种机制，保证每个属性的名字都是独一无二的就好了，这样就从根本上防止属性名的冲突。这就是 ES6 引入Symbol的原因。 特性：1234567891011121314151617181920212223">
+<meta name="keywords" content="郑星星">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Symbol">
+<meta property="og:url" content="https://971389117.github.io/2019/03/05/Symbol/index.html">
+<meta property="og:site_name" content="猥琐发育，别浪">
+<meta property="og:description" content="概述原因：ES5 的对象属性名都是字符串，这容易造成属性名的冲突。比如，你使用了一个他人提供的对象，但又想为这个对象添加新的方法（mixin 模式），新方法的名字就有可能与现有方法产生冲突。如果有一种机制，保证每个属性的名字都是独一无二的就好了，这样就从根本上防止属性名的冲突。这就是 ES6 引入Symbol的原因。 特性：1234567891011121314151617181920212223">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="evernotecid://D8BFE205-F786-4362-B321-62BDA0F184F5/appyinxiangcom/21673654/ENResource/p308">
+<meta property="og:updated_time" content="2019-03-07T07:06:01.802Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Symbol">
+<meta name="twitter:description" content="概述原因：ES5 的对象属性名都是字符串，这容易造成属性名的冲突。比如，你使用了一个他人提供的对象，但又想为这个对象添加新的方法（mixin 模式），新方法的名字就有可能与现有方法产生冲突。如果有一种机制，保证每个属性的名字都是独一无二的就好了，这样就从根本上防止属性名的冲突。这就是 ES6 引入Symbol的原因。 特性：1234567891011121314151617181920212223">
+<meta name="twitter:image" content="evernotecid://D8BFE205-F786-4362-B321-62BDA0F184F5/appyinxiangcom/21673654/ENResource/p308">
+  
+    <link rel="alternate" href="/atom.xml" title="猥琐发育，别浪" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">猥琐发育，别浪</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">我们是冠军</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://971389117.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Symbol" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/05/Symbol/" class="article-date">
+  <time datetime="2019-03-05T06:05:54.000Z" itemprop="datePublished">2019-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Symbol
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>原因：ES5 的对象属性名都是字符串，这容易造成属性名的冲突。比如，你使用了一个他人提供的对象，但又想为这个对象添加新的方法（mixin 模式），新方法的名字就有可能与现有方法产生冲突。如果有一种机制，保证每个属性的名字都是独一无二的就好了，这样就从根本上防止属性名的冲突。这就是 ES6 引入Symbol的原因。<br><img src="evernotecid://D8BFE205-F786-4362-B321-62BDA0F184F5/appyinxiangcom/21673654/ENResource/p308" alt="d3d6cfe086e90f756721d5bde2c05fcf.png"></p>
+<p>特性：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明一个 Symbol</span></span><br><span class="line"><span class="keyword">let</span> s=<span class="built_in">Symbol</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">//Symbol 是原始类型</span></span><br><span class="line"><span class="keyword">typeof</span> s  <span class="comment">// symbol</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Symbol 可以有一个描述参数</span></span><br><span class="line"><span class="keyword">let</span> os=<span class="built_in">Symbol</span>(&#123;&#125;)</span><br><span class="line"><span class="keyword">let</span> ns=<span class="built_in">Symbol</span>(<span class="number">123</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//Symbol 是独一无二的，参数仅仅起到描述的作用</span></span><br><span class="line"><span class="built_in">Symbol</span>(<span class="string">'a'</span>) === <span class="built_in">Symbol</span>(<span class="string">'a'</span>) <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果描述参数是对象，会先调用toString方法，将其转换为字符串再生成一个 Symbol 值</span></span><br><span class="line"><span class="keyword">let</span> obj=&#123;</span><br><span class="line">    toString()&#123;<span class="keyword">return</span> <span class="string">'abc'</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Symbol</span>(obj) <span class="comment">//Symbol(abc)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Symbol可以转换为字符串</span></span><br><span class="line"><span class="built_in">String</span>(ns) <span class="comment">// symbol(123)</span></span><br><span class="line"><span class="built_in">String</span>(ns) === s.toString(ns) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//转换为布尔</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="built_in">Symbol</span>()) <span class="comment">//true</span></span><br><span class="line">!<span class="built_in">Symbol</span>() <span class="comment">//false</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>用作常量</strong><br>    定义一组常量，保证这组常量的值都不相等</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> log = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">log.levels = &#123;</span><br><span class="line">  DEBUG: <span class="built_in">Symbol</span>(<span class="string">'debug'</span>),</span><br><span class="line">  INFO: <span class="built_in">Symbol</span>(<span class="string">'info'</span>),</span><br><span class="line">  WARN: <span class="built_in">Symbol</span>(<span class="string">'warn'</span>)</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(log.levels.DEBUG, <span class="string">'debug message'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(log.levels.INFO, <span class="string">'info message'</span>);</span><br><span class="line">下面是另外一个例子。</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> COLOR_RED    = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">const</span> COLOR_GREEN  = <span class="built_in">Symbol</span>();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getComplement</span>(<span class="params">color</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (color) &#123;</span><br><span class="line">    <span class="keyword">case</span> COLOR_RED:</span><br><span class="line">      <span class="keyword">return</span> COLOR_GREEN;</span><br><span class="line">    <span class="keyword">case</span> COLOR_GREEN:</span><br><span class="line">      <span class="keyword">return</span> COLOR_RED;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Undefined color'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>用作属性</strong><br>    不能使用.属性,使用方括号（读写都是）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="built_in">Symbol</span>(<span class="string">'s'</span>)</span><br><span class="line"><span class="keyword">let</span> o = &#123;&#125;</span><br><span class="line">o.s=<span class="string">'123'</span></span><br><span class="line">a[s] = <span class="string">'Hello'</span></span><br><span class="line"><span class="comment">//&#123;s: "123", Symbol(s): "Hello"&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(o,s,&#123;<span class="attr">value</span>:<span class="string">"hello"</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://971389117.github.io/2019/03/05/Symbol/" data-id="cjsyaii6j0000i0s6u5dgfd7o" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/03/05/里的数据类型/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">里的数据类型</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-数据类型转换/">JavaScript 数据类型转换</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JavaScript-数据类型转换/" style="font-size: 10px;">JavaScript 数据类型转换</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/05/Symbol/">Symbol</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/05/里的数据类型/">里的数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/05/数据类型转换/">数据类型转换</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/11/CSS布局(未完成)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/10/css速查手册/">css速查手册</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 zxx<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
