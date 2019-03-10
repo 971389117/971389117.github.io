@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="猥琐发育，别浪">
 <meta property="og:description" content="规范的获得与设置对象原型1234// Object.getPrototypeOf(参数对象) :参数对象的原型对象Object.getPrototypeOf(new Number()) === new Number().__proto__;// Object.getPrototypeOf(参数对象,原型对象) :参数对象Object.setPrototypeOf(&amp;#123;&amp;#125;,new">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-10T03:42:58.249Z">
+<meta property="og:updated_time" content="2019-03-10T03:45:01.926Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="原型与原型链,prototype和__proto__">
 <meta name="twitter:description" content="规范的获得与设置对象原型1234// Object.getPrototypeOf(参数对象) :参数对象的原型对象Object.getPrototypeOf(new Number()) === new Number().__proto__;// Object.getPrototypeOf(参数对象,原型对象) :参数对象Object.setPrototypeOf(&amp;#123;&amp;#125;,new">
@@ -125,6 +125,8 @@
 </blockquote>
 <pre><code>name: &apos;frank&apos;
 </code></pre><p>}<br>请问 obj.toString 为什么不是 undefined？ 1.因为 obj 以某种方式拥有了 toString 这个属性<br>2.obj 拥有 toString 的方式是用过 <strong>proto</strong> 达到的<br>3.obj.<strong>proto</strong> 存储了 Object.prototype 的地址（也就是引用关系）<br>4.obj.toString === Object.prototype.toString 为 true</p>
+<hr>
+<p><a href="https://www.blogliu.com.cn/posts/e8f85541/" target="_blank" rel="noopener">构造调用</a></p>
 
       
     </div>
