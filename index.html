@@ -70,6 +70,77 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-原型与原型链-prototype和-proto" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/10/原型与原型链-prototype和-proto/" class="article-date">
+  <time datetime="2019-03-10T03:13:47.000Z" itemprop="datePublished">2019-03-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/10/原型与原型链-prototype和-proto/">原型与原型链,prototype和__proto__</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="原型与原型链"><a href="#原型与原型链" class="headerlink" title="原型与原型链"></a>原型与原型链</h1><p>每个对象都有一个<strong>proto</strong>属性，这个不是规范的，而是每个浏览器自己造的，它和[[prototype]]其实是一个意思。</p>
+<p>查找一个属性时，对象先在自己的属性中查找，如果没找到，再到[[prototype]]中查找，如果还没有再向上一层[[prototype]]中查找，直到 Object.prototype若还没有就返回undefined，这就是 JS 的原型与原型链</p>
+<h1 id="prototype和proto"><a href="#prototype和proto" class="headerlink" title="prototype和proto"></a>prototype和<strong>proto</strong></h1><ol>
+<li><p>每个对象都有一个 <strong>proto</strong> 属性，该属性指向该对象构造函数的prototype指向的对象，也就是原型对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通自建对象指向Object.prototype</span></span><br><span class="line">(&#123;&#125;).__proto__ === <span class="built_in">Object</span>.prototype  <span class="comment">//true</span></span><br><span class="line"><span class="comment">// 内建对象指向构造函数的prototype</span></span><br><span class="line">(<span class="keyword">new</span> <span class="built_in">Number</span>).__proto__ === <span class="built_in">Number</span>.prototype</span><br></pre></td></tr></table></figure>
+<p>呢么，函数的的构造函数是谁呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.__proto__ === <span class="built_in">Function</span>.prototype <span class="comment">//true</span></span><br><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>所有函数都是由 Function函数 构造的，包括 Object</strong></p>
+<blockquote>
+<blockquote>
+<p>Function怎么来的？我也不知道，现阶段也没必要理解</p>
+</blockquote>
+</blockquote>
+<ol start="2">
+<li>函数的原型对象的<strong>proto</strong>最终都指向 Object.prototype<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.prototype.__proto__ === <span class="built_in">Object</span>.prototype <span class="comment">// true</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;).prototype.__proto__ === <span class="built_in">Object</span>.prototype <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>即便是看起来的矛盾体，也不例外<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.__proto__ === <span class="built_in">Object</span>.prototype</span><br><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.protoype</span><br></pre></td></tr></table></figure></p>
+<p><strong>对象原型的终点都是 Object.prototype</strong></p>
+<hr>
+<p>练习 1.</p>
+<blockquote>
+<blockquote>
+<p><strong>proto</strong> 和 prototype 的区别是什么？<br> 1.不能断章取义，<strong>proto</strong> 和 prototype 只是两个 key 而已<br> 2.我们一般研究对象的<strong>proto</strong>和函数的prototype<br> 3.对象.<strong>proto</strong> === 某函数.prototype<br> 4.如果把函数看成对象，那么函数.<strong>proto</strong> === Function.prototype<br> 5.如果把 Function 看成对象，那么 Function.<strong>proto</strong> === Function.prototype</p>
+</blockquote>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p> 练习 2.</p>
+<blockquote>
+<blockquote>
+<p>var obj = {<br>    name: ‘frank’<br>}<br>请问 obj.toString 为什么不是 undefined？<br>1.因为 obj 以某种方式拥有了 toString 这个属性<br> 2.obj 拥有 toString 的方式是用过 <strong>proto</strong> 达到的<br> 3.obj.<strong>proto</strong> 存储了 Object.prototype 的地址（也就是引用关系）<br> 4.obj.toString === Object.prototype.toString 为 true</p>
+</blockquote>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://971389117.github.io/2019/03/10/原型与原型链-prototype和-proto/" data-id="cjt2cjyhf0007lfs6ey20b2wm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Symbol" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/03/05/Symbol/" class="article-date">
@@ -102,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2019/03/05/Symbol/" data-id="cjsyaii6j0000i0s6u5dgfd7o" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2019/03/05/Symbol/" data-id="cjt2cjyhg0008lfs6zbbllxv5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -126,7 +197,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/05/js里的数据类型/">里的数据类型</a>
+      <a class="article-title" href="/2019/03/05/js里的数据类型/">js里的数据类型</a>
     </h1>
   
 
@@ -134,7 +205,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="JS-里的数据类型"><a href="#JS-里的数据类型" class="headerlink" title="JS 里的数据类型"></a>JS 里的数据类型</h1><p>JS 有其中数据类型，未来还可能增加两种新的数据类型。</p>
+        <p>JS 有其中数据类型，未来还可能增加两种新的数据类型。</p>
 <h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><p><a href="https://app.yinxiang.com/shard/s48/nl/21673654/6a563c87-0e5a-4e40-a746-a695b3a342af/" target="_blank" rel="noopener">Symbol</a></p>
 <h2 id="undefined"><a href="#undefined" class="headerlink" title="undefined"></a>undefined</h2><p>代表空</p>
 <h2 id="null"><a href="#null" class="headerlink" title="null"></a>null</h2><p>代表空</p>
@@ -166,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2019/03/05/js里的数据类型/" data-id="cjsyap1xs0000lws670sgahih" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2019/03/05/js里的数据类型/" data-id="cjt2cjyhi000alfs69cyd3poi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -218,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/11/11/CSS布局(未完成)/" data-id="cjsyaii6p0002i0s6hq2wwipj" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/11/11/CSS布局(未完成)/" data-id="cjt2cjygd0000lfs6b2rtyqqv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -608,7 +679,7 @@ styles]
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/11/10/css速查手册/" data-id="cjsyaii6y0008i0s6ugiduwtc" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/11/10/css速查手册/" data-id="cjt2cjyhe0006lfs61ygtotmn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -893,7 +964,7 @@ multiline title&quot;&gt;example&lt;/abbr&gt;</code><br><code>data-*</code> 全�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/10/24/html速查手册/" data-id="cjsyaii74000bi0s6xfz0iwat" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/10/24/html速查手册/" data-id="cjt2cjyhh0009lfs66gskv5he" class="article-share-link">Share</a>
       
       
     </footer>
@@ -944,7 +1015,7 @@ multiline title&quot;&gt;example&lt;/abbr&gt;</code><br><code>data-*</code> 全�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/10/22/HTTP简述/" data-id="cjsyaii6t0003i0s6v82i7yw1" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/10/22/HTTP简述/" data-id="cjt2cjyh90002lfs6p5a82oos" class="article-share-link">Share</a>
       
       
     </footer>
@@ -995,7 +1066,7 @@ multiline title&quot;&gt;example&lt;/abbr&gt;</code><br><code>data-*</code> 全�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/10/22/HTTP简单初步/" data-id="cjsyaii6m0001i0s6rw65ryum" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/10/22/HTTP简单初步/" data-id="cjt2cjygg0001lfs6odhj478b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1070,7 +1141,7 @@ fi
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/10/18/bash简单笔记/" data-id="cjsyaii6u0004i0s6isemnikg" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/10/18/bash简单笔记/" data-id="cjt2cjyhb0003lfs6gb8t5vsc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1137,52 +1208,7 @@ fi
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/10/17/git命令简记/" data-id="cjsyaii6w0006i0s6osiwvnwc" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/17/hello-world/" class="article-date">
-  <time datetime="2018-10-17T08:36:19.000Z" itemprop="datePublished">2018-10-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/17/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/10/17/hello-world/" data-id="cjsyaii6v0005i0s6jw1u2qvq" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/10/17/git命令简记/" data-id="cjt2cjyhd0005lfs6kn4d04hl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1193,6 +1219,11 @@ fi
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -1202,23 +1233,9 @@ fi
 
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"></ul>
-    </div>
-  </div>
-
 
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      
-    </div>
-  </div>
-
   
     
   <div class="widget-wrap">
@@ -1237,11 +1254,15 @@ fi
       <ul>
         
           <li>
+            <a href="/2019/03/10/原型与原型链-prototype和-proto/">原型与原型链,prototype和__proto__</a>
+          </li>
+        
+          <li>
             <a href="/2019/03/05/Symbol/">Symbol</a>
           </li>
         
           <li>
-            <a href="/2019/03/05/js里的数据类型/">里的数据类型</a>
+            <a href="/2019/03/05/js里的数据类型/">js里的数据类型</a>
           </li>
         
           <li>
@@ -1250,10 +1271,6 @@ fi
         
           <li>
             <a href="/2018/11/10/css速查手册/">css速查手册</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/24/html速查手册/">html速查手册</a>
           </li>
         
       </ul>
