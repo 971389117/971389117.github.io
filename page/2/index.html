@@ -70,6 +70,148 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-bash简单笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/18/bash简单笔记/" class="article-date">
+  <time datetime="2018-10-18T01:35:21.000Z" itemprop="datePublished">2018-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/18/bash简单笔记/">bash简单笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是一篇基础的学习笔记，内容为自己掌握内容，未掌握内容用时查阅文档即可。</p>
+<h2 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h2><p>如何使用这些命令<br><code>ls</code> 列出命令列表<br><code>cat</code> 查看文本文件<br><code>mv</code> 移动或重命名<br><code>touch</code> 创建文件<br><code>tar</code> 压缩解压缩<br><code>cd</code> 移动目录<br><code>type</code> 可以看到寻找过程<br><code>which</code> 可以看到寻找结果</p>
+<blockquote>
+<p><strong>Too Long; Don’t Read</strong><br>    tldr ls|cat|mv|touch</p>
+</blockquote>
+<h2 id="升级篇"><a href="#升级篇" class="headerlink" title="升级篇"></a>升级篇</h2><h3 id="变量-与-传递参数"><a href="#变量-与-传递参数" class="headerlink" title="变量 与 传递参数"></a>变量 与 传递参数</h3><p>一 变量<br>定义 abcd=abcd<br>使用 $abcd</p>
+<p>只读变量 <code>readonly myUrl</code><br>删除变量 <code>unset variable_name</code></p>
+<p>二 传参</p>
+<p>test.sh</p>
+<pre><code>#!/bin/bash
+echo &quot;$1&quot;
+echo &quot;$2&quot;
+</code></pre><p>执行脚本：chmod +x test.sh<br>./test.sh 1 2<br>1<br>2</p>
+<blockquote>
+<p>$# 可以获得参数个数</p>
+</blockquote>
+<p><a href="http://www.runoob.com/linux/linux-shell-passing-arguments.html" target="_blank" rel="noopener">传参参考</a></p>
+<h3 id="添加到环境变量"><a href="#添加到环境变量" class="headerlink" title="添加到环境变量"></a>添加到环境变量</h3><p><code>export PATH=$PATH:path/to/append</code> </p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>定义<br>array_name=(value0 value1 value2 value3)<br>使用<br>${数组名[下标]}<br>valuen=${array_name[n]}<br>valuen=${array_name[n]}</p>
+<h3 id="输入-输出重定向"><a href="#输入-输出重定向" class="headerlink" title="输入/输出重定向"></a>输入/输出重定向</h3><p>echo ‘输出重定向’ &gt; a.txt<br>echo ‘输出追加重定向’ &gt;&gt; a.txt<br><a href="http://www.runoob.com/linux/linux-shell-io-redirections.html" target="_blank" rel="noopener">参考</a></p>
+<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><h4 id="if"><a href="#if" class="headerlink" title="if"></a>if</h4><p>if 方括号中【num2*2-num1+20-20】计算结果为100，结果输出两个数相等<br>在方括号中，可以进行算术运算</p>
+<pre><code>num1=100
+num2=100
+
+if test $num1 -eq $[num2*2-num1+20-20]
+then 
+    echo &apos;两个数相等&apos;
+else
+    echo &apos;两个数不相等&apos;
+fi
+</code></pre><p>更多用法查看文档</p>
+<p>for 循环<br><a href="http://www.runoob.com/linux/linux-shell-process-control.html" target="_blank" rel="noopener">http://www.runoob.com/linux/linux-shell-process-control.html</a></p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p><a href="http://www.runoob.com/linux/linux-shell-func.html" target="_blank" rel="noopener">http://www.runoob.com/linux/linux-shell-func.html</a></p>
+<h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><p>递归的更改文件属组：<code>chgrp [-R] 属组名 文件名</code><br>更改文件属主，以及属组<br><code>chown [-R] 属主名 文件名</code><br><code>chown [-R] 属主名:属组名 文件名</code></p>
+<p>更改文件属性<br>数字法：<br>r = 4  w = 2  x = 1<br>7 可读可写可执行<br>6 可读可写<br>5 可读可执行<br>4 可读<br>3 可写可执行<br>2 可写<br>1 可执行<br>0 不可读不可写不可执行</p>
+<p><code>chmod [-R] 777 文件或目录</code></p>
+<p>字母法：<br>u = user  g = group  o = other  a = all</p>
+<p>直接赋值：<code>chmod u=rwx,g=rx,o=r 文件名</code><br>增量赋值: <code>chmod u+x 文件名</code><br>拿掉所有人可执行权限: <code>chmod a-x 文件名</code></p>
+<p>本篇参考资料：<br><a href="https://explainshell.com/explain?cmd=ls+-lrt" target="_blank" rel="noopener">命令行释义:explainshell.com</a><br><a href="https://explainshell.com/explain?cmd=ls+-lrt" target="_blank" rel="noopener">常见使用方法：太长不要读</a><br><a href="https://xiedaimala.com/tasks/24e32d28-9aeb-4010-a643-d97904e8101d" target="_blank" rel="noopener">写代码啦：命令行基础</a><br><a href="http://www.runoob.com/linux/linux-shell.html" target="_blank" rel="noopener">菜鸟教程：shell</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://971389117.github.io/2018/10/18/bash简单笔记/" data-id="cjt8kcm8p0004kis6mxmcma15" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-git命令简记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/17/git命令简记/" class="article-date">
+  <time datetime="2018-10-17T08:49:10.000Z" itemprop="datePublished">2018-10-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/17/git命令简记/">git命令简记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要篇"><a href="#前情提要篇" class="headerlink" title="前情提要篇"></a>前情提要篇</h2><p>万物第一件事是安装与更新，但是网络教程繁多，本文目的为自己知识整理掌握，不一一详述。</p>
+<p>问：如何设置 SSH_KEY?<br>答：<br>官网解答：<a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/" target="_blank" rel="noopener">设置ssh key</a></p>
+<p>自己解答：</p>
+<ol>
+<li><strong>在本机生成 sshkey</strong></li>
+</ol>
+<p>运行 <code>ssh-keygen -t rsa -b 4096 -C &quot;邮箱&quot;</code><br>运行 <code>cat ~/.ssh/id_rsa.pub</code> 复制显示的 sshkey</p>
+<ol start="2">
+<li><strong>在 GitHub 上设置 sshkey</strong></li>
+</ol>
+<p>注册账户,右上角选择 settings, 选择 SSH and GPG keys<br><img src="evernotecid://CA06FE42-1B76-4E3C-88D7-061DA0323D14/wwwevernotecom/188479944/ENResource/p47" alt="ce4a0b4751df25b4ffcb8ce2fd3b579e.jpeg"></p>
+<ol start="3">
+<li>回到命令行<br>运行 <code>ssh -T git@github.com</code><br>如果告诉你”Hi 971389117! You’ve successfully authenticated, but GitHub does not provide shell access.”,就成功了,否则重新来过.</li>
+</ol>
+<p>问：如何配置本地 GitHub 账户信息？<br>git config –global user.name 你的英文名<br>git config –global user.email 你的邮箱<br>git config –global push.default matching<br>git config –global core.quotepath false<br>git config –global core.editor “vim”<br>五句话，依次运行。不执行的话，电脑可能会爆炸你信不信。</p>
+<p>查看当前生效配置 <code>git config -l</code><br>其它可以参考 <code>tldr git config</code></p>
+<h2 id="正式入门篇"><a href="#正式入门篇" class="headerlink" title="正式入门篇"></a>正式入门篇</h2><h3 id="基础入门"><a href="#基础入门" class="headerlink" title="基础入门"></a>基础入门</h3><p>应用题:(一)在桌面生成一个文件夹,进入里面,初始化 git 仓库,生成两个任意文件,添加到暂存区,最后提交修改.每个步骤都要查看状态.</p>
+<p>解答:</p>
+<p>初始化仓库 <code>git init</code><br>添加到暂存 <code>git add *</code><br>提交 <code>git commit -m &quot;评论&quot;</code><br>查看状态 <code>git status -sb</code> s 不是summary 摘要,总结,而是 short; b是 branch 分支<br>查看日志 <code>git log</code></p>
+<p>(二)在GitHub 上新建一个仓库,名称随意,将本地项目与远端项目链接起来.<br>git remote add origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:<strong>971389117/git-demo-1.git</strong></p>
+<p>(三)将本地仓库推送到远程仓库<br>答:1.git add *</p>
+<pre><code>2. git commit -m &quot;&quot;
+3. git pull 将远程拉下来（更新本地仓库）
+4. git push 或者 git push -u origin master
+</code></pre><p> 简答题:请说出如何克隆一个远程仓库到本地<br> 1️⃣获得远程仓库的 HTTPS 或者 SSH 地址<br> 2️⃣git clone SSH地址或 HTTPS 地址</p>
+<p> 请简述【git ignore】的作用.<br> 答: 【gitignore】是 git 项目根目录下的一个文本文件，可以忽略以及避免不必要的文件内容上传到远程仓库。<br><img src="evernotecid://CA06FE42-1B76-4E3C-88D7-061DA0323D14/wwwevernotecom/188479944/ENResource/p48" alt="e7267c551292b66d863dc59f3eef532e.png"><br><img src="evernotecid://CA06FE42-1B76-4E3C-88D7-061DA0323D14/wwwevernotecom/188479944/ENResource/p49" alt="7c481d1e0e7b6639e36b95b44f22252e.png"><br>例如以上设置，就可以避免【.gitignore】【node_modules】以及【.vscode】上传到远程仓库</p>
+<p>简答题：.gitignore 怎么查询有几种书写方式？最常见的书写方式有哪些？</p>
+<h2 id="GitHub-奇技淫巧"><a href="#GitHub-奇技淫巧" class="headerlink" title="GitHub 奇技淫巧"></a>GitHub 奇技淫巧</h2><h3 id="使用-GitHub-Pages-预览-HTML"><a href="#使用-GitHub-Pages-预览-HTML" class="headerlink" title="使用 GitHub Pages 预览 HTML"></a>使用 GitHub Pages 预览 HTML</h3><ol>
+<li>Settings <img src="evernotecid://CA06FE42-1B76-4E3C-88D7-061DA0323D14/wwwevernotecom/188479944/ENResource/p51" alt="0fa887d8c172f7b82c761d96e85cbb8e.png"></li>
+</ol>
+<p><a href="https://xiedaimala.com/tasks/24e32d28-9aeb-4010-a643-d97904e8101d/text_tutorials/317c56bc-d774-415c-9594-4b11e67a3f5d" target="_blank" rel="noopener">参考链接</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://971389117.github.io/2018/10/17/git命令简记/" data-id="cjt8kcm8s0007kis66swoczug" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/17/hello-world/" class="article-date">
@@ -105,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/10/17/hello-world/" data-id="cjt2cjyhc0004lfs66d0cq4aw" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/10/17/hello-world/" data-id="cjt8kcm8q0005kis6u31vh9cr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -151,6 +293,14 @@
       <ul>
         
           <li>
+            <a href="/2019/03/14/实现两个jqueryAPI/">实现两个jqueryAPI</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/14/API/">API</a>
+          </li>
+        
+          <li>
             <a href="/2019/03/10/原型与原型链-prototype和-proto/">原型与原型链,prototype和__proto__</a>
           </li>
         
@@ -160,14 +310,6 @@
         
           <li>
             <a href="/2019/03/05/js里的数据类型/">js里的数据类型</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/11/CSS布局(未完成)/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/10/css速查手册/">css速查手册</a>
           </li>
         
       </ul>

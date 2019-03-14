@@ -5,19 +5,20 @@
   
 
   
-  <title>Archives: 2018/10 | 猥琐发育，别浪</title>
+  <title>实现两个jqueryAPI | 猥琐发育，别浪</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="林海听涛">
+  <meta name="description" content="window.jQuery = function(nodeOrSelector) {  var nodes = {}  //包装这个要返回的jQuery对象  if(typeof nodeOrSelector === ‘string’) {    var temp = document.querySelectorAll(nodeOrSelector)   //伪数组    for(let i =">
 <meta name="keywords" content="郑星星">
-<meta property="og:type" content="website">
-<meta property="og:title" content="猥琐发育，别浪">
-<meta property="og:url" content="https://971389117.github.io/archives/2018/10/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现两个jqueryAPI">
+<meta property="og:url" content="https://971389117.github.io/2019/03/14/实现两个jqueryAPI/index.html">
 <meta property="og:site_name" content="猥琐发育，别浪">
-<meta property="og:description" content="林海听涛">
+<meta property="og:description" content="window.jQuery = function(nodeOrSelector) {  var nodes = {}  //包装这个要返回的jQuery对象  if(typeof nodeOrSelector === ‘string’) {    var temp = document.querySelectorAll(nodeOrSelector)   //伪数组    for(let i =">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-14T11:39:16.140Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="猥琐发育，别浪">
-<meta name="twitter:description" content="林海听涛">
+<meta name="twitter:title" content="实现两个jqueryAPI">
+<meta name="twitter:description" content="window.jQuery = function(nodeOrSelector) {  var nodes = {}  //包装这个要返回的jQuery对象  if(typeof nodeOrSelector === ‘string’) {    var temp = document.querySelectorAll(nodeOrSelector)   //伪数组    for(let i =">
   
     <link rel="alternate" href="/atom.xml" title="猥琐发育，别浪" type="application/atom+xml">
   
@@ -68,135 +69,60 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/24/html速查手册/" class="archive-article-date">
-  <time datetime="2018-10-24T10:09:12.000Z" itemprop="datePublished">Oct 24</time>
+        <section id="main"><article id="post-实现两个jqueryAPI" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/14/实现两个jqueryAPI/" class="article-date">
+  <time datetime="2019-03-14T11:38:41.000Z" itemprop="datePublished">2019-03-14</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/24/html速查手册/">html速查手册</a>
+    <h1 class="article-title" itemprop="name">
+      实现两个jqueryAPI
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/22/HTTP简述/" class="archive-article-date">
-  <time datetime="2018-10-22T05:49:39.000Z" itemprop="datePublished">Oct 22</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/22/HTTP简述/">HTTP简述</a>
-    </h1>
-  
+        <p>window.jQuery = function(nodeOrSelector) {<br>  var nodes = {}<br>  //包装这个要返回的jQuery对象<br>  if(typeof nodeOrSelector === ‘string’) {<br>    var temp = document.querySelectorAll(nodeOrSelector)   //伪数组<br>    for(let i = 0; i &lt;temp.length; i++) {<br>      nodes[i] = temp[i]<br>    }<br>    nodes.length = temp.length<br>  } else if(nodeOrSelector instanceof Node) {<br>    nodes = {0: nodeOrSelector, length: 1}<br>  }</p>
+<p>  console.log(‘nodes’, nodes)<br>  nodes.getSiblings =  function() {<br>    var allChildren = node.parentNode.children<br>    var siblings = {length:0}<br>    for(var i = 0; i &lt; allChildren.length; i++) {<br>      if(allChildren[i] !== node) {<br>        siblings[siblings.length++] = allChildren[i]<br>      }<br>    }<br>    console.log(siblings)</p>
+<pre><code>return siblings
+</code></pre><p>  },</p>
+<p>  nodes.addClass = function(classes) {<br>    classes.forEach((value) =&gt; {<br>      for(var i = 0; i &lt; nodes.length; i++) {<br>        nodes[i].classList.add(value)<br>      }<br>    })</p>
+<p>  },</p>
+<p>  nodes.text = function(text) {<br>    if(text === undefined) {  //getText<br>      var texts = []<br>      for(var i = 0; i &lt; nodes.length; i++) {<br>        texts.push(nodes[i].textContent)<br>      }<br>      console.log(texts)<br>      return texts<br>    } else { //setText<br>      for(var i = 0; i &lt; nodes.length; i++) {<br>        nodes[i].textContent = text<br>      }<br>    }<br>  }</p>
+<p>  return nodes<br>}</p>
+<p>使用：<br>var my_node = jQuery(‘ul&gt;li’)<br>更加简洁的使用：<br>window.$ = jQuery<br>var my_node2 = $(‘ul&gt;li’)</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/22/HTTP简单初步/" class="archive-article-date">
-  <time datetime="2018-10-22T05:32:55.000Z" itemprop="datePublished">Oct 22</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/22/HTTP简单初步/">HTTP简单初步</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/18/bash简单笔记/" class="archive-article-date">
-  <time datetime="2018-10-18T01:35:21.000Z" itemprop="datePublished">Oct 18</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://971389117.github.io/2019/03/14/实现两个jqueryAPI/" data-id="cjt8kcm8r0006kis632tid8ar" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/18/bash简单笔记/">bash简单笔记</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/17/git命令简记/" class="archive-article-date">
-  <time datetime="2018-10-17T08:49:10.000Z" itemprop="datePublished">Oct 17</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/17/git命令简记/">git命令简记</a>
-    </h1>
-  
-
-    </header>
+    </footer>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/17/hello-world/" class="archive-article-date">
-  <time datetime="2018-10-17T08:36:19.000Z" itemprop="datePublished">Oct 17</time>
-</a>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/17/hello-world/">Hello World</a>
-    </h1>
   
+    <a href="/2019/03/14/API/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">API</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-  
-    </div></section>
-  
-
 
 </section>
         
