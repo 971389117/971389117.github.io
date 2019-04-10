@@ -7,18 +7,18 @@
   
   <title>原型与原型链,prototype和__proto__ | 猥琐发育，别浪</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="规范的获得与设置对象原型1234// Object.getPrototypeOf(参数对象) :参数对象的原型对象Object.getPrototypeOf(new Number()) === new Number().__proto__;// Object.getPrototypeOf(参数对象,原型对象) :参数对象Object.setPrototypeOf(&amp;#123;&amp;#125;,new">
+  <meta name="description" content="规范的获得与设置对象原型1234// Object.getPrototypeOf(参数对象) :参数对象的原型对象Object.getPrototypeOf(new Number()) === new Number().__proto__;// Object.setPrototypeOf(参数对象,原型对象) :参数对象Object.setPrototypeOf(&amp;#123;&amp;#125;,new">
 <meta name="keywords" content="郑星星">
 <meta property="og:type" content="article">
 <meta property="og:title" content="原型与原型链,prototype和__proto__">
 <meta property="og:url" content="https://971389117.github.io/2019/03/10/原型与原型链-prototype和-proto/index.html">
 <meta property="og:site_name" content="猥琐发育，别浪">
-<meta property="og:description" content="规范的获得与设置对象原型1234// Object.getPrototypeOf(参数对象) :参数对象的原型对象Object.getPrototypeOf(new Number()) === new Number().__proto__;// Object.getPrototypeOf(参数对象,原型对象) :参数对象Object.setPrototypeOf(&amp;#123;&amp;#125;,new">
+<meta property="og:description" content="规范的获得与设置对象原型1234// Object.getPrototypeOf(参数对象) :参数对象的原型对象Object.getPrototypeOf(new Number()) === new Number().__proto__;// Object.setPrototypeOf(参数对象,原型对象) :参数对象Object.setPrototypeOf(&amp;#123;&amp;#125;,new">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-10T03:45:01.926Z">
+<meta property="og:updated_time" content="2019-04-10T00:38:32.686Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="原型与原型链,prototype和__proto__">
-<meta name="twitter:description" content="规范的获得与设置对象原型1234// Object.getPrototypeOf(参数对象) :参数对象的原型对象Object.getPrototypeOf(new Number()) === new Number().__proto__;// Object.getPrototypeOf(参数对象,原型对象) :参数对象Object.setPrototypeOf(&amp;#123;&amp;#125;,new">
+<meta name="twitter:description" content="规范的获得与设置对象原型1234// Object.getPrototypeOf(参数对象) :参数对象的原型对象Object.getPrototypeOf(new Number()) === new Number().__proto__;// Object.setPrototypeOf(参数对象,原型对象) :参数对象Object.setPrototypeOf(&amp;#123;&amp;#125;,new">
   
     <link rel="alternate" href="/atom.xml" title="猥琐发育，别浪" type="application/atom+xml">
   
@@ -91,7 +91,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="规范的获得与设置对象原型"><a href="#规范的获得与设置对象原型" class="headerlink" title="规范的获得与设置对象原型"></a>规范的获得与设置对象原型</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Object.getPrototypeOf(参数对象) :参数对象的原型对象</span></span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(<span class="keyword">new</span> <span class="built_in">Number</span>()) === <span class="keyword">new</span> <span class="built_in">Number</span>().__proto__;</span><br><span class="line"><span class="comment">// Object.getPrototypeOf(参数对象,原型对象) :参数对象</span></span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(&#123;&#125;,<span class="keyword">new</span> <span class="built_in">Number</span>) <span class="keyword">instanceof</span> <span class="built_in">Number</span></span><br></pre></td></tr></table></figure>
+        <h2 id="规范的获得与设置对象原型"><a href="#规范的获得与设置对象原型" class="headerlink" title="规范的获得与设置对象原型"></a>规范的获得与设置对象原型</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Object.getPrototypeOf(参数对象) :参数对象的原型对象</span></span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(<span class="keyword">new</span> <span class="built_in">Number</span>()) === <span class="keyword">new</span> <span class="built_in">Number</span>().__proto__;</span><br><span class="line"><span class="comment">// Object.setPrototypeOf(参数对象,原型对象) :参数对象</span></span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(&#123;&#125;,<span class="keyword">new</span> <span class="built_in">Number</span>) <span class="keyword">instanceof</span> <span class="built_in">Number</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <blockquote>
 <p>实际应用中，应避免使用 <code>__proto__</code></p>
@@ -99,20 +99,20 @@
 </blockquote>
 <h2 id="原型与原型链"><a href="#原型与原型链" class="headerlink" title="原型与原型链"></a>原型与原型链</h2><p>每个对象都有一个<strong>proto</strong>属性，这个不是规范的，而是每个浏览器自己造的，它和[[prototype]]其实是一个意思。</p>
 <p>查找一个属性时，对象先在自己的属性中查找，如果没找到，再到[[prototype]]中查找，如果还没有再向上一层[[prototype]]中查找，直到 Object.prototype 若还没有就返回 undefined，这就是 JS 的原型与原型链</p>
-<h2 id="prototype-和proto"><a href="#prototype-和proto" class="headerlink" title="prototype 和proto"></a>prototype 和<strong>proto</strong></h2><ol>
-<li>每个对象都有一个 <strong>proto</strong> 属性，该属性指向该对象构造函数的 prototype 指向的对象，也就是原型对象</li>
+<h2 id="prototype-和proto"><a href="#prototype-和proto" class="headerlink" title="prototype 和proto"></a>prototype 和<strong><strong>proto</strong></strong></h2><ol>
+<li>每个对象都有一个 <strong>proto</strong> 属性，而每个函数都有一个 prototype 属性，对象的<strong>proto</strong>总是指向指向构造该对象的构造函数的 prototype 指向的对象，也就是原型对象</li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通自建对象指向Object.prototype</span></span><br><span class="line">((&#123;&#125;.__proto__ ===</span><br><span class="line">  <span class="built_in">Object</span>.prototype(</span><br><span class="line">    <span class="comment">//true</span></span><br><span class="line">    <span class="comment">// 内建对象指向构造函数的prototype</span></span><br><span class="line">    <span class="keyword">new</span> <span class="built_in">Number</span>()</span><br><span class="line">  ).__proto__) ===</span><br><span class="line">  <span class="built_in">Number</span>.prototype);</span><br></pre></td></tr></table></figure>
-<p>呢么，函数的的构造函数是谁呢？</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.__proto__ === <span class="built_in">Function</span>.prototype <span class="comment">//true</span></span><br><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype <span class="comment">//true</span></span><br><span class="line"><span class="string">``</span><span class="string">`</span></span><br><span class="line"><span class="string">**所有函数都是由 Function函数 构造的，包括 Object**</span></span><br><span class="line"><span class="string">&gt;&gt;Function怎么来的？我也不知道，现阶段也没必要理解</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">2. 函数的原型对象的__proto__最终都指向 Object.prototype</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line"><span class="built_in">Number</span>.prototype.__proto__ === <span class="built_in">Object</span>.prototype <span class="comment">// true</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;).prototype.__proto__ === <span class="built_in">Object</span>.prototype <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-<p>即便是看起来的矛盾体，也不例外</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通自建对象指向Object.prototype，说明普通对象是由 Object 函数构造的</span></span><br><span class="line">((&#123;&#125;.__proto__ ===</span><br><span class="line">  <span class="built_in">Object</span>.prototype(</span><br><span class="line">    <span class="comment">//true</span></span><br><span class="line"><span class="comment">// 内建对象通常都拥有自己的构造函数</span></span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Number</span>().__proto__ === <span class="built_in">Number</span>.prototype;</span><br></pre></td></tr></table></figure>
+<p>呢么，在 JS 中，函数也是对象，函数的构造函数是谁呢？看下面的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.__proto__ === <span class="built_in">Function</span>.prototype <span class="comment">//true</span></span><br><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype <span class="comment">//true</span></span><br><span class="line"><span class="string">``</span><span class="string">`</span></span><br><span class="line"><span class="string">**可以看到，函数是由 Function 构造函数所构造的，包括 Object函数 **</span></span><br><span class="line"><span class="string">&gt;&gt;Function怎么来的？我也不知道，现阶段也没必要理解</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">2. 函数除了__proto__,还有 prototype,而 prototype对象 的构造函数，最终都指向 它们的祖先，Object.prototype</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line"><span class="built_in">Number</span>.prototype.__proto__ === <span class="built_in">Object</span>.prototype <span class="comment">// true</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;).prototype.__proto__ === <span class="built_in">Object</span>.prototype <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p>即便表面是看起来的矛盾体，也不例外</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.__proto__ === <span class="built_in">Object</span>.prototype;</span><br><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.protoype;</span><br></pre></td></tr></table></figure>
 <p><strong>对象原型的终点都是 Object.prototype</strong></p>
 <hr>
 <p>练习 1.</p>
 <blockquote>
 <blockquote>
-<p><strong>proto</strong> 和 prototype 的区别是什么？ 1.不能断章取义，<strong>proto</strong> 和 prototype 只是两个 key 而已 2.我们一般研究对象的<strong>proto</strong>和函数的 prototype 3.对象.<strong>proto</strong> === 某函数.prototype 4.如果把函数看成对象，那么函数.<strong>proto</strong> === Function.prototype 5.如果把 Function 看成对象，那么 Function.<strong>proto</strong> === Function.prototype</p>
+<p><strong>proto</strong> 和 prototype 的区别是什么？<br>1.不能断章取义，<strong>proto</strong> 和 prototype 只是两个 key 而已<br>2.我们一般研究对象的<strong>proto</strong>和函数的 prototype<br>3.对象.<strong>proto</strong> === 某函数.prototype<br>4.如果把函数看成对象，那么函数.<strong>proto</strong> === Function.prototype<br>5.如果把 Function 看成对象，同样的 Function.<strong>proto</strong> === Function.prototype</p>
 </blockquote>
 </blockquote>
 <pre><code class="js">
@@ -120,13 +120,11 @@
 <p>练习 2.</p>
 <blockquote>
 <blockquote>
-<p>var obj = {</p>
+<p>var obj = {<br> name: ‘frank’<br>}<br>请问 obj.toString 为什么不是 undefined？<br>1.因为 obj 以某种方式拥有了 toString 这个属性<br>2.obj 拥有 toString 的方式是通过 <strong>proto</strong> 达到的<br>3.obj.<strong>proto</strong> 存储了 Object.prototype 的地址（也就是引用关系）<br>4.obj.toString === Object.prototype.toString 为 true</p>
 </blockquote>
 </blockquote>
-<pre><code>name: &apos;frank&apos;
-</code></pre><p>}<br>请问 obj.toString 为什么不是 undefined？ 1.因为 obj 以某种方式拥有了 toString 这个属性<br>2.obj 拥有 toString 的方式是用过 <strong>proto</strong> 达到的<br>3.obj.<strong>proto</strong> 存储了 Object.prototype 的地址（也就是引用关系）<br>4.obj.toString === Object.prototype.toString 为 true</p>
 <hr>
-<p><a href="https://www.blogliu.com.cn/posts/e8f85541/" target="_blank" rel="noopener">构造调用</a></p>
+<p>参考：<br><a href="https://www.blogliu.com.cn/posts/e8f85541/" target="_blank" rel="noopener">构造调用</a></p>
 
       
     </div>
