@@ -93,11 +93,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="web-性能优化"><a href="#web-性能优化" class="headerlink" title="web 性能优化"></a>web 性能优化</h1><p>什么是 web 性能优化呢？用户感觉 网站加载贼快！<br>CPU 占用少属于 服务器优化</p>
-<blockquote>
-<blockquote>
-<p>资源的消耗总是存在的，只是对妥协现实与技术进行妥协，权衡比重，达到一个体验上的最佳感觉</p>
-</blockquote>
-</blockquote>
+<p><code>资源的消耗总是存在的，只是对妥协现实与技术进行妥协，权衡比重，达到一个体验上的最佳感觉</code></p>
 <h2 id="网页加载步骤与优化"><a href="#网页加载步骤与优化" class="headerlink" title="网页加载步骤与优化"></a>网页加载步骤与优化</h2><ol>
 <li>缓存</li>
 <li>DNS 查询<br>【减少 DNS 查询】</li>
@@ -107,7 +103,7 @@
 <li>接收完成（readyState） -&gt; HTML</li>
 <li>DOCTYPE html/xml 【不能不写】</li>
 <li>逐行解析（阅读） HTML，</li>
-<li>看到<h1> 【减少标签 - 】<br>IE CSS 不阻塞渲染 1.在页面显示标题<br>Chrome 阻塞渲染 2.不在页面显示标题</h1></li>
+<li>看到<code>&lt;h1&gt;</code><br>IE CSS 不阻塞渲染 1.在页面显示标题<br>Chrome 阻塞渲染 2.不在页面显示标题<br>【减少标签 - 】</li>
 <li>看到 css<br>下载 css<br>同时下载 css2<br>同时下载 css3<br>……<br>注：下载并行，解析串行<br>【CDN】</li>
 <li>看到 js<br>下载 js<br>同时下载 js2<br>同时下载 js3<br>……<br>注：js 阻塞 HTML 渲染<br>【CDN】</li>
 </ol>
@@ -172,42 +168,6 @@
 
 
   
-    <article id="实现两个jquery-API" class="article article-type-实现两个jquery" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/14/API/" class="article-date">
-  <time datetime="2019-03-14T11:38:31.000Z" itemprop="datePublished">2019-03-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/14/API/">API</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2019/03/14/API/" data-id="cjudkajb00000bes62kthgi8g" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-原型与原型链-prototype和-proto" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/03/10/原型与原型链-prototype和-proto/" class="article-date">
@@ -230,12 +190,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="规范的获得与设置对象原型"><a href="#规范的获得与设置对象原型" class="headerlink" title="规范的获得与设置对象原型"></a>规范的获得与设置对象原型</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Object.getPrototypeOf(参数对象) :参数对象的原型对象</span></span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(<span class="keyword">new</span> <span class="built_in">Number</span>()) === <span class="keyword">new</span> <span class="built_in">Number</span>().__proto__;</span><br><span class="line"><span class="comment">// Object.setPrototypeOf(参数对象,原型对象) :参数对象</span></span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(&#123;&#125;,<span class="keyword">new</span> <span class="built_in">Number</span>) <span class="keyword">instanceof</span> <span class="built_in">Number</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>实际应用中，应避免使用 <code>__proto__</code></p>
-</blockquote>
-</blockquote>
+        <h2 id="规范的获得与设置对象原型"><a href="#规范的获得与设置对象原型" class="headerlink" title="规范的获得与设置对象原型"></a>规范的获得与设置对象原型</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Object.getPrototypeOf(参数对象) :参数对象的原型对象</span></span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(<span class="keyword">new</span> <span class="built_in">Number</span>()) === <span class="keyword">new</span> <span class="built_in">Number</span>().__proto__;</span><br><span class="line"><span class="comment">// Object.setPrototypeOf(参数对象,原型对象) :参数对象</span></span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(&#123;&#125;, <span class="keyword">new</span> <span class="built_in">Number</span>()) <span class="keyword">instanceof</span> <span class="built_in">Number</span>;</span><br></pre></td></tr></table></figure>
+<p>ps:实际应用中，应避免使用 <code>__proto__</code></p>
 <h2 id="原型与原型链"><a href="#原型与原型链" class="headerlink" title="原型与原型链"></a>原型与原型链</h2><p>每个对象都有一个<strong>proto</strong>属性，这个不是规范的，而是每个浏览器自己造的，它和[[prototype]]其实是一个意思。</p>
 <p>查找一个属性时，对象先在自己的属性中查找，如果没找到，再到[[prototype]]中查找，如果还没有再向上一层[[prototype]]中查找，直到 Object.prototype 若还没有就返回 undefined，这就是 JS 的原型与原型链</p>
 <h2 id="prototype-和proto"><a href="#prototype-和proto" class="headerlink" title="prototype 和proto"></a>prototype 和<strong><strong>proto</strong></strong></h2><ol>
@@ -249,19 +205,11 @@
 <p><strong>对象原型的终点都是 Object.prototype</strong></p>
 <hr>
 <p>练习 1.</p>
-<blockquote>
-<blockquote>
-<p><strong>proto</strong> 和 prototype 的区别是什么？<br>1.不能断章取义，<strong>proto</strong> 和 prototype 只是两个 key 而已<br>2.我们一般研究对象的<strong>proto</strong>和函数的 prototype<br>3.对象.<strong>proto</strong> === 某函数.prototype<br>4.如果把函数看成对象，那么函数.<strong>proto</strong> === Function.prototype<br>5.如果把 Function 看成对象，同样的 Function.<strong>proto</strong> === Function.prototype</p>
-</blockquote>
-</blockquote>
+<p><strong>proto</strong> 和 prototype 的区别是什么？ 1.不能断章取义，<strong>proto</strong> 和 prototype 只是两个 key 而已 2.我们一般研究对象的<strong>proto</strong>和函数的 prototype 3.对象.<strong>proto</strong> === 某函数.prototype 4.如果把函数看成对象，那么函数.<strong>proto</strong> === Function.prototype 5.如果把 Function 看成对象，同样的 Function.<strong>proto</strong> === Function.prototype</p>
 <pre><code class="js">
 </code></pre>
 <p>练习 2.</p>
-<blockquote>
-<blockquote>
-<p>var obj = {<br> name: ‘frank’<br>}<br>请问 obj.toString 为什么不是 undefined？<br>1.因为 obj 以某种方式拥有了 toString 这个属性<br>2.obj 拥有 toString 的方式是通过 <strong>proto</strong> 达到的<br>3.obj.<strong>proto</strong> 存储了 Object.prototype 的地址（也就是引用关系）<br>4.obj.toString === Object.prototype.toString 为 true</p>
-</blockquote>
-</blockquote>
+<p>var obj = {<br>name: ‘frank’<br>}<br>请问 obj.toString 为什么不是 undefined？ 1.因为 obj 以某种方式拥有了 toString 这个属性<br>2.obj 拥有 toString 的方式是通过 <strong>proto</strong> 达到的<br>3.obj.<strong>proto</strong> 存储了 Object.prototype 的地址（也就是引用关系）<br>4.obj.toString === Object.prototype.toString 为 true</p>
 <hr>
 <p>参考：<br><a href="https://www.blogliu.com.cn/posts/e8f85541/" target="_blank" rel="noopener">构造调用</a></p>
 
@@ -1140,6 +1088,57 @@ multiline title&quot;&gt;example&lt;/abbr&gt;</code><br><code>data-*</code> 全�
 
 
   
+    <article id="post-HTTP简述" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/22/HTTP简述/" class="article-date">
+  <time datetime="2018-10-22T05:49:39.000Z" itemprop="datePublished">2018-10-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/22/HTTP简述/">HTTP简述</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h2><ul>
+<li>输入域名，输出 IP</li>
+<li>将域名和 IP 地址相互映射的一个分布式数据库</li>
+</ul>
+<p>nslookup baidu.com<br>ping baidu.com</p>
+<h2 id="curl-命令"><a href="#curl-命令" class="headerlink" title="curl 命令"></a>curl 命令</h2><p><a href="https://explainshell.com/explain?cmd=echo#" target="_blank" rel="noopener">查看参数意思</a><br> -d –data   -s –silent  -v –verbose  -H –header</p>
+<p><code>curl -X POST -d &quot;1234567890&quot; -s -v -H &quot;Frank: xxx&quot; -- &quot;https://www.baidu.com&quot;</code></p>
+<p>curl 和 wget 的区别</p>
+<blockquote>
+<p>wget是个专职的下载利器，简单，专一，极致；而curl可以下载，但是长项不在于下载，而在于模拟提交web数据，POST/GET请求，调试网页，等等。<br>在下载上，也各有所长，wget可以递归，支持断点；而curl支持URL中加入变量，因此可以批量下载。<br>个人用途上，我经常用wget来下载文件，加 -c选项不怕断网；使用curl 来跟网站的API 交互，简便清晰。</p>
+</blockquote>
+<h2 id="HTTP-请求包括哪些部分"><a href="#HTTP-请求包括哪些部分" class="headerlink" title="HTTP 请求包括哪些部分"></a>HTTP 请求包括哪些部分</h2><p>请求包含三或四个部分：<br>动词 路径 协议/版本<br>2 Key1: value1<br>2 Key2: value2<br>2 Key3: value3<br>2 Content-Type: application/x-www-form-urlencoded<br>2 Host: <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a><br>2 User-Agent: curl/7.54.0<br>3<br>4 要上传的数据</p>
+<p>请求最多包含四部分，最少包含三部分。（也就是说第四部分可以为空）<br>第三部分永远都是一个回车（\n）<br>动词有 GET POST PUT PATCH DELETE HEAD OPTIONS 等<br>这里的路径包括「查询参数」，但不包括「锚点」<br>如果你没有写路径，那么路径默认为 /<br>第 2 部分中的 Content-Type 标注了第 4 部分的格式</p>
+<h2 id="HTTP-响应包括哪些部分"><a href="#HTTP-响应包括哪些部分" class="headerlink" title="HTTP 响应包括哪些部分"></a>HTTP 响应包括哪些部分</h2><p>响应的格式<br>1 协议/版本号 状态码 状态解释<br>2 Key1: value1<br>2 Key2: value2<br>2 Content-Length: 17931<br>2 Content-Type: text/html<br>3<br>4 要下载的内容<br>状态码要背，是服务器对浏览器说的话<br>1xx 不常用<br>2xx 表示成功<br>3xx 表示滚吧<br>4xx 表示你丫错了<br>5xx 表示好吧，我错了<br>状态解释没什么用<br>第 2 部分中的 Content-Type 标注了第 4 部分的格式<br>第 2 部分中的 Content-Type 遵循 MIME 规范    </p>
+<h3 id="如何用Chrome开发者工具查看-HTTP-响应内容"><a href="#如何用Chrome开发者工具查看-HTTP-响应内容" class="headerlink" title="如何用Chrome开发者工具查看 HTTP 响应内容"></a>如何用Chrome开发者工具查看 HTTP 响应内容</h3><p>用 Chrome 发请求<br>打开 Network<br>地址栏输入网址<br>在 Network 点击，查看 request或 response，点击「view source」</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://971389117.github.io/2018/10/22/HTTP简述/" data-id="cjudkajb80004bes6b1lm75t6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
 
 
   <nav id="page-nav">
@@ -1184,15 +1183,15 @@ multiline title&quot;&gt;example&lt;/abbr&gt;</code><br><code>data-*</code> 全�
           </li>
         
           <li>
-            <a href="/2019/03/14/API/">API</a>
-          </li>
-        
-          <li>
             <a href="/2019/03/10/原型与原型链-prototype和-proto/">原型与原型链,prototype和__proto__</a>
           </li>
         
           <li>
             <a href="/2019/03/05/Symbol/">Symbol</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/05/js里的数据类型/">js里的数据类型</a>
           </li>
         
       </ul>
