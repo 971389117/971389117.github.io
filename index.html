@@ -70,6 +70,59 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-软连接和硬链接" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/12/软连接和硬链接/" class="article-date">
+  <time datetime="2019-04-12T08:12:39.000Z" itemprop="datePublished">2019-04-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/12/软连接和硬链接/">软连接和硬链接</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code></code></p>
+<h2 id="什么是链接？"><a href="#什么是链接？" class="headerlink" title="什么是链接？"></a>什么是链接？</h2><p>链接简单说实际上是一种文件共享的方式，是 POSIX 中的概念，主流文件系统都支持链接文件。</p>
+<h2 id="它是用来干什么的？"><a href="#它是用来干什么的？" class="headerlink" title="它是用来干什么的？"></a>它是用来干什么的？</h2><p>你可以将链接简单地理解为 Windows 中常见的快捷方式（或是 OS X 中的替身），Linux 中常用它来解决一些库版本的问题，通常也会将一些目录层次较深的文件链接到一个更易访问的目录中。在这些用途上，我们通常会使用到软链接（也称符号链接）。</p>
+<h2 id="软链接和硬链接的区别是？"><a href="#软链接和硬链接的区别是？" class="headerlink" title="软链接和硬链接的区别是？"></a>软链接和硬链接的区别是？</h2><p>我们做一个实验</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"This is a plain text file."</span> &gt; myfile</span><br><span class="line">ln myfile hard</span><br><span class="line">ln -s myfile soft</span><br><span class="line">ls -li</span><br><span class="line"></span><br><span class="line">total 16</span><br><span class="line">9313039 -rw-r--r--  2 zhengxingxing  staff  27  4 12 16:28 hard</span><br><span class="line">9313039 -rw-r--r--  2 zhengxingxing  staff  27  4 12 16:28 myfile</span><br><span class="line">9313042 lrwxr-xr-x  1 zhengxingxing  staff   6  4 12 16:28 sort -&gt; myfile</span><br></pre></td></tr></table></figure>
+<p><code>rm *</code><br>在 ls 结果的最左边一列，是文件的 inode 值，你可以简单把它想成 C 语言中的指针。它指向了物理硬盘的一个区块，事实上文件系统会维护一个引用计数，只要有文件指向这个区块，它就不会从硬盘上消失。</p>
+<p>可以看到，hard 和 myfile 都指向同一个区块（例如程序中的：<code>a=obj;b=a</code>)<br>然而软链接的 inode 不一样啊，并且它的文件属性上也有一个 l 的 flag，这就说明它与之前我们创建的两个文件根本不是一个类型。</p>
+<p>删除 myfile 文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rm myfile</span><br><span class="line">cat hard</span><br><span class="line"></span><br><span class="line">This is a plain text file.</span><br><span class="line"></span><br><span class="line">cat soft</span><br><span class="line"></span><br><span class="line">cat: soft: No such file or directory</span><br></pre></td></tr></table></figure></p>
+<p>之前的硬链接没有丝毫地影响，因为它 inode¹ 所指向的区块由于有一个硬链接在指向它，所以这个区块仍然有效，并且可以访问到。<br>然而软链接的 inode 所指向的内容实际上是保存了一个绝对路径，当用户访问这个文件时，系统会自动将其替换成其所指的文件路径，然而这个文件已经被删除了，所以自然就会显示无法找到该文件了。<br>为验证这一猜想，我们再向这个软链接写点东西：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"Something"</span> &gt;&gt; soft</span><br><span class="line">$ ls</span><br><span class="line"></span><br><span class="line">hard   myfile soft</span><br></pre></td></tr></table></figure>
+<p>可以看到，刚才删除的 myfile 文件竟然又出现了！这就说明，当我们写入访问软链接时，系统自动将其路径替换为其所代表的绝对路径，并直接访问那个路径了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到这里我们其实可以总结一下了：</p>
+<ul>
+<li>硬链接： 与普通文件没什么不同，<code>inode</code> 都指向同一个文件在硬盘中的区块</li>
+<li>软链接： 保存了其代表的文件的绝对路径，是另外一种文件，在硬盘上有独立的区块，访问时替换自身路径。</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>1.<br>inode是指在许多“类Unix文件系统”中的一种数据结构。每个inode保存了文件系统中的一个文件系统对象（包括文件、目录、设备文件、socket、管道, 等等）的元信息数据，但不包括数据内容或者文件名。<br>Unix先驱丹尼斯·里奇说，inode这个命名的来源可能是文件系统的存储组织为一个扁平数组，分层目录信息使用一个数作为文件系统这个扁平数组的索引值（index）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://971389117.github.io/2019/04/12/软连接和硬链接/" data-id="cjudtjofv000as5s6uep1rofy" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Web性能优化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/12/Web性能优化/" class="article-date">
@@ -113,7 +166,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2019/04/12/Web性能优化/" data-id="cjudkajb40001bes6cf063mmn" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2019/04/12/Web性能优化/" data-id="cjudtjofq0005s5s6zimlqw0n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -158,7 +211,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2019/03/14/实现两个jqueryAPI/" data-id="cjudkajbc000abes68eci5mpm" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2019/03/14/实现两个jqueryAPI/" data-id="cjudtjofx000bs5s6h75dqgiv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -216,7 +269,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2019/03/10/原型与原型链-prototype和-proto/" data-id="cjudkajbc0009bes62ao0yyum" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2019/03/10/原型与原型链-prototype和-proto/" data-id="cjudtjofu0009s5s67x16r7j9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -258,7 +311,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2019/03/05/Symbol/" data-id="cjudkajbg000cbes6d27nh2d1" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2019/03/05/Symbol/" data-id="cjudtjofr0006s5s679tbqg9e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -322,7 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2019/03/05/js里的数据类型/" data-id="cjudkajbb0008bes6c4po7u4v" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2019/03/05/js里的数据类型/" data-id="cjudtjoft0008s5s68o41ilxw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -351,7 +404,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2019/03/04/数据类型转换/" data-id="cjudkajbf000bbes649j53liq" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2019/03/04/数据类型转换/" data-id="cjudtjofy000cs5s6mb7xhph6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -403,7 +456,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/11/11/CSS布局(未完成)/" data-id="cjudkajb60002bes6gnduajau" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/11/11/CSS布局(未完成)/" data-id="cjudtjofg0000s5s6knghdeoa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -793,7 +846,7 @@ styles]
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/11/10/css速查手册/" data-id="cjudkajc5000dbes6l34duo6k" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/11/10/css速查手册/" data-id="cjudtjogh000ds5s6be37ycxp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1078,58 +1131,7 @@ multiline title&quot;&gt;example&lt;/abbr&gt;</code><br><code>data-*</code> 全�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/10/24/html速查手册/" data-id="cjudkajc5000ebes6kpsk7bvi" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-HTTP简述" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/22/HTTP简述/" class="article-date">
-  <time datetime="2018-10-22T05:49:39.000Z" itemprop="datePublished">2018-10-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/22/HTTP简述/">HTTP简述</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h2><ul>
-<li>输入域名，输出 IP</li>
-<li>将域名和 IP 地址相互映射的一个分布式数据库</li>
-</ul>
-<p>nslookup baidu.com<br>ping baidu.com</p>
-<h2 id="curl-命令"><a href="#curl-命令" class="headerlink" title="curl 命令"></a>curl 命令</h2><p><a href="https://explainshell.com/explain?cmd=echo#" target="_blank" rel="noopener">查看参数意思</a><br> -d –data   -s –silent  -v –verbose  -H –header</p>
-<p><code>curl -X POST -d &quot;1234567890&quot; -s -v -H &quot;Frank: xxx&quot; -- &quot;https://www.baidu.com&quot;</code></p>
-<p>curl 和 wget 的区别</p>
-<blockquote>
-<p>wget是个专职的下载利器，简单，专一，极致；而curl可以下载，但是长项不在于下载，而在于模拟提交web数据，POST/GET请求，调试网页，等等。<br>在下载上，也各有所长，wget可以递归，支持断点；而curl支持URL中加入变量，因此可以批量下载。<br>个人用途上，我经常用wget来下载文件，加 -c选项不怕断网；使用curl 来跟网站的API 交互，简便清晰。</p>
-</blockquote>
-<h2 id="HTTP-请求包括哪些部分"><a href="#HTTP-请求包括哪些部分" class="headerlink" title="HTTP 请求包括哪些部分"></a>HTTP 请求包括哪些部分</h2><p>请求包含三或四个部分：<br>动词 路径 协议/版本<br>2 Key1: value1<br>2 Key2: value2<br>2 Key3: value3<br>2 Content-Type: application/x-www-form-urlencoded<br>2 Host: <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a><br>2 User-Agent: curl/7.54.0<br>3<br>4 要上传的数据</p>
-<p>请求最多包含四部分，最少包含三部分。（也就是说第四部分可以为空）<br>第三部分永远都是一个回车（\n）<br>动词有 GET POST PUT PATCH DELETE HEAD OPTIONS 等<br>这里的路径包括「查询参数」，但不包括「锚点」<br>如果你没有写路径，那么路径默认为 /<br>第 2 部分中的 Content-Type 标注了第 4 部分的格式</p>
-<h2 id="HTTP-响应包括哪些部分"><a href="#HTTP-响应包括哪些部分" class="headerlink" title="HTTP 响应包括哪些部分"></a>HTTP 响应包括哪些部分</h2><p>响应的格式<br>1 协议/版本号 状态码 状态解释<br>2 Key1: value1<br>2 Key2: value2<br>2 Content-Length: 17931<br>2 Content-Type: text/html<br>3<br>4 要下载的内容<br>状态码要背，是服务器对浏览器说的话<br>1xx 不常用<br>2xx 表示成功<br>3xx 表示滚吧<br>4xx 表示你丫错了<br>5xx 表示好吧，我错了<br>状态解释没什么用<br>第 2 部分中的 Content-Type 标注了第 4 部分的格式<br>第 2 部分中的 Content-Type 遵循 MIME 规范    </p>
-<h3 id="如何用Chrome开发者工具查看-HTTP-响应内容"><a href="#如何用Chrome开发者工具查看-HTTP-响应内容" class="headerlink" title="如何用Chrome开发者工具查看 HTTP 响应内容"></a>如何用Chrome开发者工具查看 HTTP 响应内容</h3><p>用 Chrome 发请求<br>打开 Network<br>地址栏输入网址<br>在 Network 点击，查看 request或 response，点击「view source」</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://971389117.github.io/2018/10/22/HTTP简述/" data-id="cjudkajb80004bes6b1lm75t6" class="article-share-link">Share</a>
+      <a data-url="https://971389117.github.io/2018/10/24/html速查手册/" data-id="cjudtjogi000es5s60z106zs2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1175,6 +1177,10 @@ multiline title&quot;&gt;example&lt;/abbr&gt;</code><br><code>data-*</code> 全�
       <ul>
         
           <li>
+            <a href="/2019/04/12/软连接和硬链接/">软连接和硬链接</a>
+          </li>
+        
+          <li>
             <a href="/2019/04/12/Web性能优化/">Web性能优化</a>
           </li>
         
@@ -1188,10 +1194,6 @@ multiline title&quot;&gt;example&lt;/abbr&gt;</code><br><code>data-*</code> 全�
         
           <li>
             <a href="/2019/03/05/Symbol/">Symbol</a>
-          </li>
-        
-          <li>
-            <a href="/2019/03/05/js里的数据类型/">js里的数据类型</a>
           </li>
         
       </ul>
